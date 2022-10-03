@@ -1,5 +1,7 @@
 package com.demo.translator.translatordemo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,11 @@ public class TranslatorService implements TranslatorApi{
 		int pageSize = 10;
 		Pageable pagable = PageRequest.of(pageNo, pageSize);
 		return repository.findAll(pagable); 
+	}
+
+	@Override
+	public void saveAll(List<Translation> translations) {
+		repository.saveAll(translations);
 	}
 	
 }
