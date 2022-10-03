@@ -1,12 +1,10 @@
 package com.demo.translator.translatordemo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
 
-@RestController
-public class TranslatorApi {
-	@GetMapping("/health-check")
-	public String healthCheck() {
-		return "OK";
-	}
+import com.demo.translator.translatordemo.model.Translation;
+
+public interface TranslatorApi {
+	byte[] translate();
+	Page<Translation> getData(Integer pageNo);
 }
