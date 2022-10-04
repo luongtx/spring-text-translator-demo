@@ -1,5 +1,9 @@
 package com.demo.translator.translatordemo.service;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +14,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
 
 public class ConverterService {
@@ -27,7 +27,7 @@ public class ConverterService {
 			Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 			List<Field> fields = getAllFields(clazz);
 			for (CSVRecord csvRecord : csvRecords) {
-				T t = clazz.newInstance(); 
+				T t = clazz.newInstance();
 				int index = 0;
 				for (Field field : fields) {
 					field.setAccessible(true);
@@ -38,11 +38,7 @@ public class ConverterService {
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
+		} catch (IllegalArgumentException | IllegalAccessException | InstantiationException e) {
 			e.printStackTrace();
 		}
 		return res;
@@ -55,5 +51,5 @@ public class ConverterService {
         }
         return fields;
     }
-	
+
 }
