@@ -1,0 +1,35 @@
+version: '3.0'
+networks:
+  demo-network:
+services:
+  translator:
+    build: target/
+    image: translator:dev
+    container_name: translator
+    hostname: translator
+    env_file:
+      - translator.env
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    command:
+      - java -Dfile.encoding=Cp437 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar target/translator-demo-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - db
+    networks:
+      - demo-network
+  db:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - "5432:5432"
+    volumes:
+      - /tmp:/var/lib/postgresql/data
+    networks:
+      - demo-network

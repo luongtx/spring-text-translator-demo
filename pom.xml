@@ -19,6 +19,8 @@
         <h2.version>2.1.214</h2.version>
         <common.csv>1.9.0</common.csv>
         <swagger.version>3.0.0</swagger.version>
+        <resources.plugin.version>3.3.0</resources.plugin.version>
+        <terminal.name>${project.build.finalName}.${project.packaging}</terminal.name>
     </properties>
     <dependencies>
         <dependency>
@@ -94,6 +96,30 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${resources.plugin.version}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <resources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                        </resource>
+                        <resource>
+                            <directory>src/test/resources</directory>
+                        </resource>
+                        <resource>
+                            <directory>${project.basedir}/docker</directory>
+                            <filtering>true</filtering>
+                            <targetPath>${project.build.directory}</targetPath>
+                        </resource>
+                    </resources>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
+                </configuration>
             </plugin>
         </plugins>
     </build>
