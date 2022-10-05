@@ -1,5 +1,6 @@
-package com.demo.translator.translatordemo;
+package com.demo.translator.translatordemo.web;
 
+import com.demo.translator.translatordemo.TranslatorApi;
 import com.demo.translator.translatordemo.model.Translation;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
