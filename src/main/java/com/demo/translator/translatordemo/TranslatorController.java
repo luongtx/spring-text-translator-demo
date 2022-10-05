@@ -43,7 +43,7 @@ public class TranslatorController {
 
     @GetMapping(value = "/show-translation")
     @ApiOperation(value = "show translation with paged format")
-    public Page<Translation> showTranslation(@RequestParam("page") Integer pageNo) {
+    public Page<Translation> showTranslation(@RequestParam("pageNumber") Integer pageNo) {
         return translatorApi.getData(pageNo);
     }
 }
