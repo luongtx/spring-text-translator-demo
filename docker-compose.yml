@@ -1,6 +1,9 @@
-version: '3.0'
+version: '3.5'
 networks:
   demo-network:
+volumes:
+  db-data:
+    name: db-data
 services:
   translator:
     build: target/
@@ -30,6 +33,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /tmp:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     networks:
       - demo-network
