@@ -18,7 +18,7 @@ public interface TranslatorRepository extends JpaRepository<Translation, String>
             "SELECT s1.id AS id,\n" +
                     "       s1.text AS text,\n" +
                     "       s2.id AS translation_id,\n" +
-                    "       s2.text AS translation_text,\n" +
+                    "       s2.text AS translate_text,\n" +
                     "       CONCAT('https://audio.tatoeba.org/sentences/', s1.lang, '/', s1.id, '.mp3') AS audio_url\n" +
                     "FROM sentences s1\n" +
                     "INNER JOIN links lk ON s1.id=lk.sentence_id\n" +
@@ -26,5 +26,5 @@ public interface TranslatorRepository extends JpaRepository<Translation, String>
                     "WHERE s1.lang='eng'\n" +
                     "  AND s2.lang='vie';",
             nativeQuery = true)
-    List<String[]> populateTranslation();
+    List<Translation> populateTranslation();
 }

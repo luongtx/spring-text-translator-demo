@@ -1,5 +1,6 @@
 package com.demo.translator.translatordemo;
 
+import com.demo.translator.translatordemo.model.Translation;
 import com.demo.translator.translatordemo.repository.TranslatorRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,7 @@ public class TranslatorRepositoryTest {
 
     @Test
     void testTranslator() {
-        List<String[]> translations = repository.populateTranslation();
-        translations.forEach(
-                (row) -> {
-                    for (String data : row) {
-                        System.out.print(data + " ");
-                    }
-                    System.out.println();
-                }
-        );
+        List<Translation> translations = repository.populateTranslation();
+        translations.forEach(System.out::println);
     }
 }

@@ -1,5 +1,6 @@
 package com.demo.translator.translatordemo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,10 +14,15 @@ import java.io.Serializable;
 @Table(name = "translation")
 public class Translation implements Serializable {
 
-	@Id
-	private String id;
-	private String text;
-	private String audioUrl;
-	private String translationId;
-	private String translateText;
+    @Id
+    @Column(name = "id")
+    private String id;
+    @Column(name = "text")
+    private String text;
+    @Column(name = "audio_url")
+    private String audioUrl;
+    @Column(name = "translation_id")
+    private String translationId;
+    @Column(name = "translate_text")
+    private String translateText;
 }
