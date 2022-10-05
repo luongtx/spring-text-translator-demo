@@ -61,6 +61,9 @@ public class TranslatorService implements TranslatorApi {
     }
 
     public List<Translation> getAllTranslation() {
+        if (dataPopulated()) {
+            return repository.findAll();
+        }
         return repository.populateTranslation();
     }
 
@@ -71,7 +74,7 @@ public class TranslatorService implements TranslatorApi {
 
     @Async(value = "dataImportExecutor")
     public CompletableFuture<Boolean> importToDb(List<Translation> translations) {
-        boolean dataImported = !getData(0).isEmpty();
+        boolean dataImported = dataPopulated();
         if (!dataImported) {
             try {
                 saveAll(translations);
@@ -82,6 +85,10 @@ public class TranslatorService implements TranslatorApi {
             }
         }
         return CompletableFuture.completedFuture(dataImported);
+    }
+
+    public boolean dataPopulated() {
+        return repository.count() > 0;
     }
 
 }
