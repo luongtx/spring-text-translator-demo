@@ -17,14 +17,14 @@ public class Translation implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
-    @Column(name = "text")
+    private Integer id;
+    @Column(name = "text", columnDefinition = "TEXT")
     private String text;
     @Column(name = "audio_url")
     private String audioUrl;
     @Id
     @Column(name = "translation_id")
-    private String translationId;
-    @Column(name = "translate_text")
+    private Integer translationId;
+    @Column(name = "translate_text", columnDefinition = "TEXT")
     private String translateText;
 }

@@ -13,7 +13,7 @@ import lombok.Data;
 @IdClass(LinkID.class)
 public class Link {
 	@Id
-	private String sentenceId;
+	private Integer sentenceId;
 	@Id
-	private String translationId;	
+	private Integer translationId;
 }

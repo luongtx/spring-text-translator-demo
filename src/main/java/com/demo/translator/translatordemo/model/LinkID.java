@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class LinkID implements Serializable{
-	private String sentenceId;
-	private String translationId;	
+	private Integer sentenceId;
+	private Integer translationId;
 }

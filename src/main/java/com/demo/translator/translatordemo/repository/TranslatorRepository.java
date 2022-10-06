@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.demo.translator.translatordemo.model.Translation;
 
 @Repository
-public interface TranslatorRepository extends JpaRepository<Translation, String> {
+public interface TranslatorRepository extends JpaRepository<Translation, Integer> {
     Page<Translation> findAll(Pageable pageable);
 
     @Query(value =

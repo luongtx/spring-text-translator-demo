@@ -11,7 +11,7 @@ import lombok.Data;
 @Table(name = "sentence_audio")
 public class SentenceAudio {
 	@Id
-	private String sentenceId;	
+	private Integer sentenceId;
 	private String username;
 	private String license;
 	private String attributionUrl;
