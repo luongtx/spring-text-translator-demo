@@ -3,8 +3,10 @@ package com.demo.translator.translatordemo.config;
 import com.demo.translator.translatordemo.model.Translation;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
@@ -21,7 +23,8 @@ import org.springframework.core.io.FileSystemResource;
 import javax.sql.DataSource;
 
 @Configuration
-public class ImportJobConfig {
+@EnableBatchProcessing
+public class BatchJobConfig {
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -30,6 +33,7 @@ public class ImportJobConfig {
     public StepBuilderFactory stepBuilderFactory;
 
     @Bean
+    @StepScope
     public FlatFileItemReader<Translation> reader(@Value("#{jobParameters[filePath]}") String pathToFile) {
         FlatFileItemReader<Translation> reader = new FlatFileItemReader<>();
         reader.setResource(new FileSystemResource(pathToFile));

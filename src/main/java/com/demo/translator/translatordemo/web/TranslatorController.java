@@ -7,9 +7,11 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,13 +52,13 @@ public class TranslatorController {
 
     @GetMapping(value = "/show-translation")
     @ApiOperation(value = "show translation with paged format")
-    public Page<Translation> showTranslation(@RequestParam("pageNumber") Integer pageNo) {
+    public Page<Translation> showTranslation(@RequestParam(value = "pageNumber", required = false) Integer pageNo) {
         return translatorApi.getData(pageNo);
     }
 
-    @PostMapping(value = "/translation/importUserCSV/")
+    @PostMapping(value = "/translation/import-csv/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation(value = "import user uploaded translation csv into database")
-    public String importUserCsv(@RequestParam("file") MultipartFile multipartFile) {
+    public String importTranslationCSV(@RequestPart("file") MultipartFile multipartFile) {
         importerApi.importCSV(multipartFile);
         return "Import job started";
     }
