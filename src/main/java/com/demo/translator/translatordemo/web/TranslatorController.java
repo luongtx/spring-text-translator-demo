@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import java.io.IOException;
 
 
 @RestController
+@RequestMapping("/api")
 public class TranslatorController {
 
     @Autowired
@@ -50,9 +52,9 @@ public class TranslatorController {
         }
     }
 
-    @GetMapping(value = "/show-translation")
+    @GetMapping(value = "/translations")
     @ApiOperation(value = "show translation with paged format")
-    public Page<Translation> showTranslation(@RequestParam(value = "pageNumber", required = false) Integer pageNo) {
+    public Page<Translation> showTranslation(@RequestParam(value = "page_number", required = false) Integer pageNo) {
         return translatorApi.getData(pageNo);
     }
 

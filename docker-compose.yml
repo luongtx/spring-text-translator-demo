@@ -1,6 +1,7 @@
 version: '3.5'
 networks:
   demo-network:
+    name: translator-network
 volumes:
   db-data:
     name: db-data
@@ -30,6 +31,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_HOST_AUTH_METHOD: "trust"
+      PGDATA: /var/lib/postgresql/data/db-files/
     ports:
       - "5432:5432"
     volumes:
